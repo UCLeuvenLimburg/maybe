@@ -4,6 +4,9 @@
   "description": "Maybe monad",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "npm run build",
     "clean": "rm -rf dist",
