@@ -10,6 +10,7 @@ export declare abstract class Maybe<T> {
     abstract isJust(): this is Just<T>;
     abstract useDefault(t: T): Just<T>;
 }
+export declare function absorbUndefined<T>(x: Maybe<T | undefined>): Maybe<T>;
 export declare class Just<T> extends Maybe<T> {
     value: T;
     constructor(value: T);

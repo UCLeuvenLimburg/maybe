@@ -21,6 +21,12 @@ export abstract class Maybe<T>
     public abstract useDefault(t : T) : Just<T>;
 }
 
+export function absorbUndefined<T>(x : Maybe<T | undefined>) : Maybe<T>
+{
+    return x.bind( y => typeof y === 'undefined' ? Maybe.nothing<T>() : Maybe.just<T>(y) );
+}
+
+
 export class Just<T> extends Maybe<T>
 {
     public constructor(public value : T)
