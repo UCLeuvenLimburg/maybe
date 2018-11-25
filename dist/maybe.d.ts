@@ -15,6 +15,7 @@ export declare function getProperty<T, K extends keyof T>(obj: Partial<T>, key: 
 export declare type MaybePartial<T> = {
     [P in keyof T]: Maybe<T[P]>;
 };
+export declare function maybePartial<T>(obj: Partial<T>): MaybePartial<T>;
 export declare class Just<T> extends Maybe<T> {
     value: T;
     constructor(value: T);

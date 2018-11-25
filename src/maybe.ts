@@ -43,6 +43,22 @@ export type MaybePartial<T> = {
     [P in keyof T] : Maybe<T[P]>;
 };
 
+export function maybePartial<T>(obj : Partial<T>) : MaybePartial<T>
+{
+    return new Proxy<Partial<T>>(obj, {
+        get: function (obj : Partial<T>, property : keyof T) {
+            if ( property in obj )
+            {
+                return Maybe.just(obj[property]);
+            }
+            else
+            {
+                return Maybe.nothing();
+            }
+        }
+    }) as unknown as MaybePartial<T>;
+}
+
 export class Just<T> extends Maybe<T>
 {
     public constructor(public value : T)
