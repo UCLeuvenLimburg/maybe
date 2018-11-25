@@ -26,6 +26,18 @@ export function absorbUndefined<T>(x : Maybe<T | undefined>) : Maybe<T>
     return x.bind( y => typeof y === 'undefined' ? Maybe.nothing<T>() : Maybe.just<T>(y) );
 }
 
+export function getProperty<T, K extends keyof T>(obj : Partial<T>, key : K) : Maybe<T[K]>
+{
+    if ( key in obj )
+    {
+        const value = obj[key] as T[K];
+        return Maybe.just(value);
+    }
+    else
+    {
+        return Maybe.nothing();
+    }
+}
 
 export class Just<T> extends Maybe<T>
 {
