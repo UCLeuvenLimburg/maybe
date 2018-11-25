@@ -12,7 +12,8 @@
     "clean": "rm -rf dist",
     "build": "webpack --mode development",
     "production": "webpack --mode production",
-    "test": "mocha -r ts-node/register ./tests/*"
+    "test": "mocha -r ts-node/register ./tests/*",
+    "beep": "echo -ne '\u0007'"
   },
   "repository": {
     "type": "git",
