@@ -12,6 +12,9 @@ export declare abstract class Maybe<T> {
 }
 export declare function absorbUndefined<T>(x: Maybe<T | undefined>): Maybe<T>;
 export declare function getProperty<T, K extends keyof T>(obj: Partial<T>, key: K): Maybe<T[K]>;
+export declare type MaybePartial<T> = {
+    [P in keyof T]: Maybe<T[P]>;
+};
 export declare class Just<T> extends Maybe<T> {
     value: T;
     constructor(value: T);

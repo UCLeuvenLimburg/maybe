@@ -39,6 +39,10 @@ export function getProperty<T, K extends keyof T>(obj : Partial<T>, key : K) : M
     }
 }
 
+export type MaybePartial<T> = {
+    [P in keyof T] : Maybe<T[P]>;
+};
+
 export class Just<T> extends Maybe<T>
 {
     public constructor(public value : T)
