@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Maybe } from '../src/maybe';
+import { Maybe, maybePartial } from '../src/maybe';
 
 
 describe('isJust', () => {
@@ -118,5 +118,23 @@ describe('lift', () => {
         it('should return Nothing', () => {
             expect(y.isJust()).to.be.false;
         });
+    });
+});
+
+
+describe('maybePartial', () => {
+    it('turns missing properties in nothing', () => {
+        const original : { x ?: number } = {};
+        const transformed = maybePartial(original);
+
+        expect( transformed.x.isJust() ).to.be.false;
+    });
+
+    it('turns existing properties in just', () => {
+        const original : { x ?: number } = { x: 5 };
+        const transformed = maybePartial(original);
+
+        expect( transformed.x.isJust() ).to.be.true;
+        expect( (transformed.x as any).value ).to.be.equal(5);
     });
 });
