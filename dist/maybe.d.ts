@@ -38,3 +38,12 @@ export declare class Nothing<T> extends Maybe<T> {
     isJust(): this is Just<T>;
     useDefault(t: T): Just<T>;
 }
+/**
+ * Takes an object with Maybe properties. If every property is Just,
+ * an object with Maybes replaced by their values is returned.
+ * If one property is Nothing, undefined is returned.
+ * Non-maybe properties are simply copied.
+ *
+ * @param obj Object to unpartialize.
+ */
+export declare function raiseMaybe<T>(obj: MaybePartial<T>): Maybe<T>;

@@ -130,16 +130,17 @@ export class Nothing<T> extends Maybe<T>
  */
 export function raiseMaybe<T>(obj: MaybePartial<T>): Maybe<T>
 {
-    const result: any = {};
+    const result: {[P in keyof T] ?: unknown} = {};
 
     for (const key of Object.keys(obj))
     {
-        const propertyValue = (obj as any)[key];
+        const typedKey = key as keyof T;
+        const propertyValue = obj[typedKey];
 
         if (propertyValue.isJust())
         {
             // It's a Just: retrieve value and put it in result
-            result[key] = propertyValue.value;
+            result[typedKey] = propertyValue.value;
         }
         else
         {
@@ -148,5 +149,5 @@ export function raiseMaybe<T>(obj: MaybePartial<T>): Maybe<T>
         }
     }
 
-    return Maybe.just(result);
+    return Maybe.just(result as T);
 }
