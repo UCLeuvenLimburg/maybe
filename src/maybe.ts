@@ -119,3 +119,34 @@ export class Nothing<T> extends Maybe<T>
         return Maybe.just(t);
     }
 }
+
+/**
+ * Takes an object with Maybe properties. If every property is Just,
+ * an object with Maybes replaced by their values is returned.
+ * If one property is Nothing, undefined is returned.
+ * Non-maybe properties are simply copied.
+ *
+ * @param obj Object to unpartialize.
+ */
+export function raiseMaybe<T>(obj: MaybePartial<T>): Maybe<T>
+{
+    const result: any = {};
+
+    for (const key of Object.keys(obj))
+    {
+        const propertyValue = (obj as any)[key];
+
+        if (propertyValue.isJust())
+        {
+            // It's a Just: retrieve value and put it in result
+            result[key] = propertyValue.value;
+        }
+        else
+        {
+            // We found a Nothing, abort operation
+            return Maybe.nothing();
+        }
+    }
+
+    return Maybe.just(result);
+}
