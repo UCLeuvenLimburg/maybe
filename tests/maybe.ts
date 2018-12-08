@@ -3,15 +3,13 @@ import { Maybe } from '../src/maybe';
 
 
 describe('isJust', () => {
-    it('returns true on Just')
-    {
+    it('returns true on Just', () => {
         expect( Maybe.just(5).isJust() ).to.be.true;
-    }
+    });
 
-    it('returns false on Nothing')
-    {
+    it('returns false on Nothing', () => {
         expect( Maybe.nothing<number>().isJust() ).to.be.false;
-    }
+    });
 });
 
 
@@ -20,7 +18,7 @@ describe('useDefault', () => {
         it('returns a Just', () => {
             expect( Maybe.just(5).useDefault(3).isJust() ).to.be.true;
         });
-        
+
         it('keeps the old value', () => {
             expect( Maybe.just(3).useDefault(9).value).to.be.equal(3);
         });
@@ -30,7 +28,7 @@ describe('useDefault', () => {
         it('returns a Just', () => {
             expect( Maybe.nothing<number>().useDefault(3).isJust() ).to.be.true;
         });
-        
+
         it('should have value equal to default value', () => {
             expect( Maybe.nothing<number>().useDefault(1).value ).to.be.equal(1);
         });
